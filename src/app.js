@@ -18,15 +18,14 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(morgan("dev"));
 
-app.use("/api/users", userRoutes);
-app.use("/api/courses", courseRoutes);
-
-
 app.use(cors({
   // origin: ["http://localhost:5173", "https://lms-project-client-eta.vercel.app/"],
   // credentials: true
   origin: CLIENT_URL, credentials: true
 }));
+
+app.use("/api/users", userRoutes);
+app.use("/api/courses", courseRoutes);
 
 app.get("/", (req, res) => {
   res.send("LMS API is running...");
