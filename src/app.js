@@ -19,8 +19,6 @@ app.use(cookieParser());
 app.use(morgan("dev"));
 
 app.use(cors({
-  // origin: ["http://localhost:5173", "https://lms-project-client-eta.vercel.app/"],
-  // credentials: true
   origin: CLIENT_URL, credentials: true
 }));
 
