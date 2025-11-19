@@ -11,19 +11,21 @@ dotenv.config();
 connectDB();
 
 const app = express();
+
+const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:5173'; // set to https://lms-project-client-eta.vercel.app in Render env
+
 app.use(express.json());
-app.use(cors());
+app.use(cookieParser());
 app.use(morgan("dev"));
 
 app.use("/api/users", userRoutes);
 app.use("/api/courses", courseRoutes);
 
-// const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:5173'; // set to https://lms-project-client-eta.vercel.app in Render env
-app.use(cookieParser());
+
 app.use(cors({
   // origin: ["http://localhost:5173", "https://lms-project-client-eta.vercel.app/"],
   // credentials: true
-  origin: process.env.CLIENT_URL, credentials: true
+  origin: CLIENT_URL, credentials: true
 }));
 
 app.get("/", (req, res) => {
